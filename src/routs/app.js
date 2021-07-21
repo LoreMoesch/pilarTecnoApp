@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import { Tabs } from './Tabs'
-import { CreateStackScreen } from './CreateStack';
+// import { CreateStackScreen } from './CreateStack';
 import Login from '../screens/Login'
+import LoadScreen from '../screens/LoadScreen'
 import { useDispatch, useSelector } from 'react-redux';  // hooks de redux 
 
 const Stack = createStackNavigator();
@@ -11,21 +12,22 @@ const Stack = createStackNavigator();
 export default AppStack = (props) => {
 
     const user = useSelector(state => state.user.user)  // busca un dato en el state
-    let isLoadingApp = false
+
+    //let isLoadingApp = false
 
     return (
         <Stack.Navigator headerMode="none">
             {
-                isLoadingApp ? (
+                // isLoadingApp ? (
 
-                    <Stack.Screen name="LoadScreen" component={LoadScreen} />
-                ) :
+                //     <Stack.Screen name="LoadScreen" component={LoadScreen} />
+                // ) :
 
-                    user ? (
-                        <Stack.Screen name="AppStack" component={Tabs} />
-                    ) : (
-                        <Stack.Screen name="LogIn" component={Login} />
-                    )
+                user ? (
+                    <Stack.Screen name="AppStack" component={Tabs} />
+                ) : (
+                    <Stack.Screen name="LogIn" component={Login} />
+                )
             }
         </Stack.Navigator>
     );

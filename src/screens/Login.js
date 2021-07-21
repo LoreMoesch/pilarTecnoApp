@@ -18,22 +18,16 @@ import {
 import { Avatar, Input, Icon, Button, Divider } from 'react-native-elements';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import auth from '@react-native-firebase/auth';
+//import user from '../store/reducers/user';
 
 import { LoginButton, AccessToken, LoginManager } from 'react-native-fbsdk';
 //import { FacebookAuthProvider } from "firebase/auth";
 //import { LoginManager, AccessToken } from 'react-native-fbsdk';
 
 
-
-
-
 import { AsyncStorage } from '@react-native-async-storage/async-storage';
 import { connect } from 'react-redux';
 import { actions } from '../store';
-
-
-
-
 
 
 const height = Dimensions.get('window').height
@@ -47,16 +41,14 @@ GoogleSignin.configure({
 
 
 class Login extends React.Component {
-
     constructor(props) {
         super(props);
         this.state = {
-
-
-        }
-
-
-
+            email: '',
+            photoURL: '',
+            name: '',
+            password: '',
+        };
     }
 
     onGoogleButtonPress = async () => {
@@ -99,7 +91,9 @@ class Login extends React.Component {
 
 
     render() {
+        const { email, photoURL, name, password } = this.state;
         return (
+
             <SafeAreaView style={{ flex: 1 }}>
                 <ImageBackground
                     style={{ height }}
@@ -107,53 +101,67 @@ class Login extends React.Component {
                 >
                     <Text style={styles.text}> LOGIN </Text>
                     <Input style={styles.input}
-                        placeholder='User'
+                        placeholder='Email'
+                        value={email}
                         leftIcon={<Icon
                             name='user-alt'
                             type='font-awesome-5'
                             size={22}
                             color='#ffff' />}
+                        onChangeText={mail => this.setState({ email: mail })}
                     />
 
                     <Input style={styles.input}
                         placeholder="Password"
                         secureTextEntry={true}
+                        value={password}
                         leftIcon={<Icon
                             name='lock'
                             size={22}
                             color='#ffff' />}
+                        onChangeText={pass => this.setState({ email: pass })}
                     />
                     <View>
                         <TouchableOpacity style={[styles.button, { backgroundColor: 'rgba(165, 105, 189, 0.5)' }]}
                             onPress={() => {
-                                auth()
-                                    .createUserWithEmailAndPassword('jane.doe@example.com', 'SuperSecretPassword!')
-                                    .then(() => {
-                                        console.log('User account created & signed in!');
-                                    })
-                                    .catch(error => {
-                                        if (error.code === 'auth/email-already-in-use') {
-                                            console.log('That email address is already in use!');
-                                        }
-
-                                        if (error.code === 'auth/invalid-email') {
-                                            console.log('That email address is invalid!');
-                                        }
-
-                                        console.error(error);
-                                    });
+                                email, password ? (
+                                    auth().signInWithEmailAndPassword(email, password)
+                                        .then(async data => {
+                                            console.log('Signed in with e-mail!');
+                                            if (data) {
+                                                console.log('res login: ' + JSON.stringify(data.user));
+                                                try {
+                                                    await AsyncStorage.setItem(
+                                                        'isloged',
+                                                        JSON.stringify(data.user),
+                                                    );
+                                                } catch (e) {
+                                                    console.log('Error :' + e);
+                                                }
+                                                this.props.setUser(data.user);
+                                            }
+                                        }).catch(err => { console.log(err) })
+                                ) : (
+                                    Alert.alert('Incomplet!')
+                                )
                             }}
-
                         >
-                            <Text style={styles.text}>
-                                Aceptar
-                            </Text>
+                            <Text style={styles.text}>Sig In</Text>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity style={[styles.button, { backgroundColor: 'rgba(165, 105, 189, 0.5)' }]}
+                            onPress={() => this.props.navigation.navigate('Register')}
+                            style={[
+                                styles.button,
+                                { backgroundColor: 'rgba(165, 105, 189, 0.5)' },
+                            ]}>
+                            <Text style={styles.text}>Sign Up</Text>
                         </TouchableOpacity>
                     </View>
 
                     <View>
                         <TouchableOpacity style={[styles.button, { backgroundColor: 'rgba(165, 105, 189, 0.5)' }]}
-                            title='Continuar con Google...'
+                            //title='Continuar con Google...'
                             onPress={() => this.onGoogleButtonPress().then(async (data) => {
                                 console.log('Signed in with Google!');
                                 if (data) {
@@ -170,7 +178,7 @@ class Login extends React.Component {
                             }
                         >
                             <Text style={styles.text}>
-                                'Continuar con Google...'
+                                'Sig In with Google...'
                             </Text>
                         </TouchableOpacity>
 
@@ -178,7 +186,7 @@ class Login extends React.Component {
                     </View>
 
                     <TouchableOpacity style={[styles.button, { backgroundColor: 'rgba(165, 105, 189, 0.5)' }]}
-                        title='Continuar con Facebook...'
+                        //title='Continuar con Facebook...'
                         onPress={() => this.onFacebookButtonPress().then(async (data) => {
                             console.log('Signed in with Facebook!');
                             if (data) {
@@ -195,7 +203,7 @@ class Login extends React.Component {
                         }
                     >
                         <Text style={styles.text}>
-                            'Continuar con Facebook...'
+                            'Sig In with Facebook...'
                         </Text>
                     </TouchableOpacity>
 

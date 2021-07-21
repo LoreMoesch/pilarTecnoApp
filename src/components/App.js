@@ -32,6 +32,7 @@ const App = (props) => {
     const [initializing, setInitializing] = useState(true);
     const [user, setUser] = useState();
     const dispatch = useDispatch()
+
     // Handle user state changes
     async function onAuthStateChanged(user) {
       if (user) {
@@ -51,7 +52,7 @@ const App = (props) => {
 
     return (
       <NavigationContainer ref={navigationRef}>
-        <AppStack />
+        <AppStack />                  //app de routs
       </NavigationContainer>
     );
   }
