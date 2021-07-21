@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import {
     SafeAreaView,
     ScrollView,
@@ -52,13 +52,8 @@ GoogleSignin.configure({
 //         };
 //     }
 
-class Login extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
+const Login = (props) => {
 
-        };
-    }
 
     onGoogleButtonPress = async () => {
         const { idToken } = await GoogleSignin.signIn();
@@ -99,109 +94,83 @@ class Login extends React.Component {
 
 
 
-    render() {
-        //const [email, setEmail] = useState();
-        //const [password, setPassword] = useState();
-        const { email, password } = this.state;
-        return (
 
-            <SafeAreaView style={{ flex: 1 }}>
-                <ImageBackground
-                    style={{ height }}
-                    source={require('../assets/images/fondo.png')}
-                >
-                    <Text style={styles.text}> LOGIN </Text>
-                    <TextInput style={styles.input}
-                        placeholder="Email"
-                        value={email}
-                        leftIcon={<Icon
-                            name='user-alt'
-                            type='font-awesome-5'
-                            size={22}
-                            color='#ffff' />}
-                        onChangeText={(userEmail) => setEmail(userEmail)}
-                    />
+    const [email, setEmail] = useState('');
 
-                    <TextInput style={styles.input}
-                        placeholder="Password"
-                        secureTextEntry={true}
-                        value={password}
-                        leftIcon={<Icon
-                            name='lock'
-                            size={22}
-                            color='#ffff' />}
-                        onChangeText={(userPassWord) => setPassword(userPassWord)}
-                    />
-                    <View>
-                        <TouchableOpacity style={[styles.button, { backgroundColor: 'rgba(165, 105, 189, 0.5)' }]}
-                            onPress={() => {
-                                email, password ? (
-                                    auth().signInWithEmailAndPassword(email, password)
-                                        .then(async data => {
-                                            console.log('Signed in with e-mail!');
-                                            if (data) {
-                                                console.log('res login: ' + JSON.stringify(data.user));
-                                                try {
-                                                    await AsyncStorage.setItem(
-                                                        'isloged',
-                                                        JSON.stringify(data.user),
-                                                    );
-                                                } catch (e) {
-                                                    console.log('Error :' + e);
-                                                }
-                                                this.props.setUser(data.user);
-                                            }
-                                        }).catch(err => { console.log(err) })
-                                ) : (
-                                    Alert.alert('Incomplet!')
-                                )
-                            }}
-                        >
-                            <Text style={styles.text}>Sig In</Text>
-                        </TouchableOpacity>
+    const [password, setPassword] = useState('');
 
-                        <TouchableOpacity style={[styles.button, { backgroundColor: 'rgba(165, 105, 189, 0.5)' }]}
-                            onPress={() => this.props.navigation.navigate('Register')}
-                            style={[
-                                styles.button,
-                                { backgroundColor: 'rgba(165, 105, 189, 0.5)' },
-                            ]}>
-                            <Text style={styles.text}>Sign Up</Text>
-                        </TouchableOpacity>
-                    </View>
+    //  const { email, password } = this.state;
 
-                    <View>
-                        <TouchableOpacity style={[styles.button, { backgroundColor: 'rgba(165, 105, 189, 0.5)' }]}
-                            //title='Continuar con Google...'
-                            onPress={() => this.onGoogleButtonPress().then(async (data) => {
-                                console.log('Signed in with Google!');
-                                if (data) {
-                                    console.log('res login: ' + JSON.stringify(data.user));
-                                    try {
-                                        await AsyncStorage.setItem('isloged', JSON.stringify(data.user));   // persistencia
-                                    } catch (e) {
-                                        console.log('Hubo un Error!:' + e);
-                                    }
-                                    this.props.setUser(data.user);  // lo pasa al actions y lo guarda en el store, esto es lo que va a la pantalla de login para saber si esta logueado o no o
-                                }
-                            }).catch(err => { console.log(err) })
+    return (
 
-                            }
-                        >
-                            <Text style={styles.text}>
-                                'Sig In with Google...'
-                            </Text>
-                        </TouchableOpacity>
+        <SafeAreaView style={{ flex: 1 }}>
+            <ImageBackground
+                style={{ height }}
+                source={require('../assets/images/fondo.png')}
+            >
+                <Text style={styles.text}> LOGIN </Text>
+                <Input style={styles.input}
+                    placeholder="Email"
+                    value={email}
+                    leftIcon={<Icon
+                        name='user-alt'
+                        type='font-awesome-5'
+                        size={22}
+                        color='#ffff' />}
+                    onChangeText={(userEmail) => setEmail(userEmail)}
+
+                />
+
+                <Input style={styles.input}
+                    placeholder="Password"
+                    secureTextEntry={true}
+                    value={password}
+                    leftIcon={<Icon
+                        name='lock'
+                        size={22}
+                        color='#ffff' />}
+                    onChangeText={(userPassword) => setPassword(userPassword)}
+
+                />
+                <View>
+                    <TouchableOpacity style={[styles.button, { backgroundColor: 'rgba(165, 105, 189, 0.5)' }]}
+                        onPress={() => {
+                            email, password ? (
+                                auth().signInWithEmailAndPassword(email, password)
+                                    .then(async data => {
+                                        console.log('Signed in with e-mail!');
+                                        if (data) {
+                                            console.log('res login: ' + JSON.stringify(data.user));
+                                            try {
+                                                await AsyncStorage.setItem('isloged', JSON.stringify(data.user),);
+                                            } catch (e) { console.log('Error :' + e); }
 
 
-                    </View>
+                                            props.setUser(data.user);
+                                        }
+                                    }).catch(err => { console.log(err) })
+                            ) : (
+                                Alert.alert('Incomplet!')
+                            )
+                        }}
+                    >
+                        <Text style={styles.text}>Login</Text>
+                    </TouchableOpacity>
 
                     <TouchableOpacity style={[styles.button, { backgroundColor: 'rgba(165, 105, 189, 0.5)' }]}
-                        //title='Continuar con Facebook...'
-                        onPress={() => this.onFacebookButtonPress().then(async (data) => {
-                            console.log('Signed in with Facebook!');
+                        onPress={() => props.navigation.navigate('Register')}
+                        style={[styles.button, { backgroundColor: 'rgba(165, 105, 189, 0.5)' },]}>
+                        <Text style={styles.text}>Registrar</Text>
+                    </TouchableOpacity>
+                </View>
+
+                <View>
+                    <TouchableOpacity style={[styles.button, { backgroundColor: 'rgba(165, 105, 189, 0.5)' }]}
+                        //title='Continuar con Google...'
+                        onPress={() => this.onGoogleButtonPress().then(async (data) => {
+                            console.log('Signed in with Google!');
                             if (data) {
-                                //console.log('res login: ' + JSON.stringify(data.user));
+                                console.log('res login: ' + JSON.stringify(data.user));
                                 try {
                                     await AsyncStorage.setItem('isloged', JSON.stringify(data.user));   // persistencia
                                 } catch (e) {
@@ -214,18 +183,43 @@ class Login extends React.Component {
                         }
                     >
                         <Text style={styles.text}>
-                            'Sig In with Facebook...'
+                            'Sig In with Google...'
                         </Text>
                     </TouchableOpacity>
 
 
-                </ImageBackground>
-            </SafeAreaView>
+                </View>
+
+                <TouchableOpacity style={[styles.button, { backgroundColor: 'rgba(165, 105, 189, 0.5)' }]}
+                    //title='Continuar con Facebook...'
+                    onPress={() => this.onFacebookButtonPress().then(async (data) => {
+                        console.log('Signed in with Facebook!');
+                        if (data) {
+                            //console.log('res login: ' + JSON.stringify(data.user));
+                            try {
+                                await AsyncStorage.setItem('isloged', JSON.stringify(data.user));   // persistencia
+                            } catch (e) {
+                                console.log('Hubo un Error!:' + e);
+                            }
+                            this.props.setUser(data.user);  // lo pasa al actions y lo guarda en el store, esto es lo que va a la pantalla de login para saber si esta logueado o no o
+                        }
+                    }).catch(err => { console.log(err) })
+
+                    }
+                >
+                    <Text style={styles.text}>
+                        'Sig In with Facebook...'
+                    </Text>
+                </TouchableOpacity>
+
+
+            </ImageBackground>
+        </SafeAreaView>
 
 
 
-        )
-    }
+    )
+
 }
 
 

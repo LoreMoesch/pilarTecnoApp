@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import {
     SafeAreaView,
     ScrollView,
@@ -28,61 +28,68 @@ const height = Dimensions.get('window').height
 const width = Dimensions.get('window').width
 
 
-class Register extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            email: '',
-            photoURL: '',
-            name: '',
-            password: '',
-        };
-    }
+const Register = (props) => {
+
+    const [email, setEmail] = useState();
+    const [password, setPassword] = useState();
+    const [confirmPassword, setConfirmPassword] = useState();
 
 
+    // const { email, photoURL, name, password } = this.state;
+    return (
 
-    render() {
-        // const [email, setEmail] = useState();
-        // const [password, setPassword] = useState();
+        <SafeAreaView style={{ flex: 1 }}>
+            <ImageBackground
+                style={{ height }}
+                source={require('../assets/images/fondo.png')}
+            >
+                <Text style={styles.text}> Register User </Text>
+                <Input style={styles.input}
+                    placeholder="Email"
+                    value={email}
+                    leftIcon={<Icon
+                        name='user-alt'
+                        type='font-awesome-5'
+                        size={22}
+                        color='#ffff' />}
+                    keyboardType="email-address"
+                    autoCapitalize="none"
+                    placeholderText="Email"
+                    onChangeText={(userEmail) => setEmail(userEmail)}
+                />
 
-        const { email, photoURL, name, password } = this.state;
-        return (
+                <Input style={styles.input}
+                    placeholder="Password"
+                    secureTextEntry={true}
+                    value={password}
+                    leftIcon={<Icon
+                        name='lock'
+                        size={22}
+                        color='#ffff' />}
+                    onChangeText={(userPassword) => setPassword(userPassword)}
+                />
 
-            <SafeAreaView style={{ flex: 1 }}>
-                <ImageBackground
-                    style={{ height }}
-                    source={require('../assets/images/fondo.png')}
-                >
-                    <Text style={styles.text}> Register User </Text>
-                    <TextInput style={styles.input}
-                        placeholder="Email"
-                        value={email}
-                        leftIcon={<Icon
-                            name='user-alt'
-                            type='font-awesome-5'
-                            size={22}
-                            color='#ffff' />}
-                    // onChangeText={mail => this.setEmail({ email: mail })}
-                    />
+                <Input style={styles.input}
+                    placeholder="Confirm Password"
+                    secureTextEntry={true}
+                    value={confirmPassword}
+                    leftIcon={<Icon
+                        name='lock'
+                        size={22}
+                        color='#ffff' />}
+                    onChangeText={(userPassword) => setConfirmPassword(userPassword)}
+                />
 
-                    <TextInput style={styles.input}
-                        placeholder="Password"
-                        secureTextEntry={true}
-                        value={password}
-                        leftIcon={<Icon
-                            name='lock'
-                            size={22}
-                            color='#ffff' />}
-                    //  onChangeText={pass => this.setPassword({ email: pass })}
-                    />
-                    <View>
-                        <TouchableOpacity style={[styles.button, { backgroundColor: 'rgba(165, 105, 189, 0.5)' }]}
-                            onPress={() => {
+
+                <View>
+                    <TouchableOpacity style={[styles.button, { backgroundColor: 'rgba(165, 105, 189, 0.5)' }]}
+                        onPress={() => {
+                            password === confirmPassword ?
                                 auth().createUserWithEmailAndPassword(email, password)
                                     .then(() => {
                                         console.log('User account created');
                                         Alert.alert('Usuario Creado!')
-                                        this.props.navigation.navigate('Login');
+                                        props.navigation.navigate('Login');
                                     })
                                     .catch(error => {
                                         if (error.code === 'auth/email-already-in-use') {
@@ -96,33 +103,33 @@ class Register extends React.Component {
                                         }
 
                                         console.error(error);
-                                        Alert.alert('Verifique los datos:',
-                                            'mail valido y password: minimo 6 caracteres')
-                                    });
-                            }}
-                        >
-                            <Text style={styles.text}>Sig In</Text>
-                        </TouchableOpacity>
+                                    }) : Alert.alert('Verifique los datos nuevamente:');
+                            setPassword('');
+                            setConfirmPassword('')
+                        }}
+                    >
+                        <Text style={styles.text}>Acept</Text>
+                    </TouchableOpacity>
 
-                        <TouchableOpacity
-                            style={[
-                                styles.button,
-                                { backgroundColor: 'rgba(165, 105, 189, 0.5)' },
-                            ]}
-                            onPress={() => { this.props.navigation.goBack() }}
-                        >
-                            <Text style={styles.text}>Volver</Text>
-                        </TouchableOpacity>
-                    </View>
-
-
-                </ImageBackground>
-            </SafeAreaView>
+                    <TouchableOpacity
+                        style={[
+                            styles.button,
+                            { backgroundColor: 'rgba(165, 105, 189, 0.5)' },
+                        ]}
+                        onPress={() => { props.navigation.goBack() }}
+                    >
+                        <Text style={styles.text}>Back</Text>
+                    </TouchableOpacity>
+                </View>
 
 
+            </ImageBackground>
+        </SafeAreaView>
 
-        )
-    }
+
+
+    )
+
 }
 
 
