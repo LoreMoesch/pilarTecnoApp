@@ -52,7 +52,7 @@ const App = (props) => {
 
     return (
       <NavigationContainer ref={navigationRef}>
-        <AppStack />                  //app de routs
+        <AppStack />
       </NavigationContainer>
     );
   }

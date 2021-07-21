@@ -8,6 +8,7 @@ import {
     Text,
     ImageBackground,
     TouchableOpacity,
+    TextInput,
     View,
     Alert,
     Image,
@@ -40,14 +41,22 @@ GoogleSignin.configure({
 });
 
 
+// class Login extends React.Component {
+//     constructor(props) {
+//         super(props);
+//         this.state = {
+//             email: '',
+//             photoURL: '',
+//             name: '',
+//             password: '',
+//         };
+//     }
+
 class Login extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: '',
-            photoURL: '',
-            name: '',
-            password: '',
+
         };
     }
 
@@ -91,7 +100,9 @@ class Login extends React.Component {
 
 
     render() {
-        const { email, photoURL, name, password } = this.state;
+        //const [email, setEmail] = useState();
+        //const [password, setPassword] = useState();
+        const { email, password } = this.state;
         return (
 
             <SafeAreaView style={{ flex: 1 }}>
@@ -100,18 +111,18 @@ class Login extends React.Component {
                     source={require('../assets/images/fondo.png')}
                 >
                     <Text style={styles.text}> LOGIN </Text>
-                    <Input style={styles.input}
-                        placeholder='Email'
+                    <TextInput style={styles.input}
+                        placeholder="Email"
                         value={email}
                         leftIcon={<Icon
                             name='user-alt'
                             type='font-awesome-5'
                             size={22}
                             color='#ffff' />}
-                        onChangeText={mail => this.setState({ email: mail })}
+                        onChangeText={(userEmail) => setEmail(userEmail)}
                     />
 
-                    <Input style={styles.input}
+                    <TextInput style={styles.input}
                         placeholder="Password"
                         secureTextEntry={true}
                         value={password}
@@ -119,7 +130,7 @@ class Login extends React.Component {
                             name='lock'
                             size={22}
                             color='#ffff' />}
-                        onChangeText={pass => this.setState({ email: pass })}
+                        onChangeText={(userPassWord) => setPassword(userPassWord)}
                     />
                     <View>
                         <TouchableOpacity style={[styles.button, { backgroundColor: 'rgba(165, 105, 189, 0.5)' }]}
@@ -206,26 +217,6 @@ class Login extends React.Component {
                             'Sig In with Facebook...'
                         </Text>
                     </TouchableOpacity>
-
-                    {/* <LoginButton style={[styles.button, { backgroundColor: 'rgba(15, 105, 189, 0.5)' }]}
-                        onLoginFinished={
-                            (error, result) => {
-                                if (error) {
-                                    console.log("login has error: " + result.error);
-                                } else if (result.isCancelled) {
-                                    console.log("login is cancelled.");
-                                } else {
-                                    AccessToken.getCurrentAccessToken().then(
-                                        (data) => {
-                                            console.log(data.accessToken.toString())
-                                        }
-                                    )
-                                }
-                            }
-                        }
-                        onLogoutFinished={() => console.log("logout.")}>
-
-                    </LoginButton> */}
 
 
                 </ImageBackground>

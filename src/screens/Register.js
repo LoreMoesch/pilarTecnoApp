@@ -8,6 +8,7 @@ import {
     Text,
     ImageBackground,
     TouchableOpacity,
+    TextInput,
     View,
     Alert,
     Image,
@@ -41,6 +42,9 @@ class Register extends React.Component {
 
 
     render() {
+        // const [email, setEmail] = useState();
+        // const [password, setPassword] = useState();
+
         const { email, photoURL, name, password } = this.state;
         return (
 
@@ -50,18 +54,18 @@ class Register extends React.Component {
                     source={require('../assets/images/fondo.png')}
                 >
                     <Text style={styles.text}> Register User </Text>
-                    <Input style={styles.input}
-                        placeholder='Email'
+                    <TextInput style={styles.input}
+                        placeholder="Email"
                         value={email}
                         leftIcon={<Icon
                             name='user-alt'
                             type='font-awesome-5'
                             size={22}
                             color='#ffff' />}
-                        onChangeText={mail => this.setState({ email: mail })}
+                    // onChangeText={mail => this.setEmail({ email: mail })}
                     />
 
-                    <Input style={styles.input}
+                    <TextInput style={styles.input}
                         placeholder="Password"
                         secureTextEntry={true}
                         value={password}
@@ -69,7 +73,7 @@ class Register extends React.Component {
                             name='lock'
                             size={22}
                             color='#ffff' />}
-                        onChangeText={pass => this.setState({ email: pass })}
+                    //  onChangeText={pass => this.setPassword({ email: pass })}
                     />
                     <View>
                         <TouchableOpacity style={[styles.button, { backgroundColor: 'rgba(165, 105, 189, 0.5)' }]}
@@ -168,8 +172,6 @@ const styles = StyleSheet.create({
 
 
 })
-
-
 
 export default Register;
 
