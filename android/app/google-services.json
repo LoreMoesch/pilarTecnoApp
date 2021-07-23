@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "473554681085",
+    "project_id": "pilartecnoapp-54335",
+    "storage_bucket": "pilartecnoapp-54335.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:473554681085:android:65f6d27d4ac2e6b22d1294",
+        "android_client_info": {
+          "package_name": "com.lmoesch.pilartecnoapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "473554681085-nbcogljj2ombfr3gvi9vfrfe384g9k1f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lmoesch.pilartecnoapp",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "473554681085-otfsqbnkgqrub2bdfd0njrfkfrk2qv4r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUJSiv9Mec_y0fWe4mD7NWdPcdWd8878U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "473554681085-otfsqbnkgqrub2bdfd0njrfkfrk2qv4r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

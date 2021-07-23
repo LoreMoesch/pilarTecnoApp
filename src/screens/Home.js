@@ -49,7 +49,6 @@ export default class Home extends React.Component {
 
               <TouchableOpacity style={[styles.button, { backgroundColor: 'rgba(238, 0, 238, 0.5)' }]}
                 onPress={() => this.props.navigation.navigate("Profile")}>
-
                 <Text style={styles.text}>
                   Perfil
                 </Text>
