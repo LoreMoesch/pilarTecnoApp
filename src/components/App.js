@@ -5,10 +5,7 @@ import {
   Dimensions,
   StatusBar,
   StyleSheet,
-  Text,
-  ImageBackground,
-  useColorScheme,
-  View,
+
 } from 'react-native';
 
 import AppStack from '../routs/app';
