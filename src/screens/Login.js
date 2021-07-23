@@ -101,30 +101,7 @@ const Login = (props) => {
                     iconType="lock"
                     secureTextEntry={true}
                 />
-                {/* <Image
-                    source={require('../assets/rn-social-logo.png')}
-                    style={styles.logo}
-                /> */}
-
-
-                {/* <FormInput
-                    labelValue={email}
-                    onChangeText={(userEmail) => setEmail(userEmail)}
-                    placeholderText="Email"
-                    iconType="user"
-                    keyboardType="email-address"
-                    autoCapitalize="none"
-                    autoCorrect={false}
-                />
-
-                <FormInput
-                    labelValue={password}
-                    onChangeText={(userPassword) => setPassword(userPassword)}
-                    placeholderText="Password"
-                    iconType="lock"
-                    secureTextEntry={true}
-                /> */}
-
+               
                 <FormButton
                     buttonTitle="Sign In"
                     onPress={() => {
