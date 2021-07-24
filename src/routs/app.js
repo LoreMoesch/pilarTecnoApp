@@ -13,15 +13,10 @@ export default AppStack = (props) => {
 
     const user = useSelector(state => state.user.user)  // busca un dato en el state
 
-    //let isLoadingApp = false
 
     return (
         <Stack.Navigator headerMode="none">
             {
-                //  isLoadingApp ? (
-
-                //   <Stack.Screen name="LoadScreen" component={LoadScreen} />
-                //  ) :
 
                 user ? (
                     <Stack.Screen name="AppStack" component={Tabs} />

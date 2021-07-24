@@ -74,7 +74,7 @@ const Register = (props) => {
         <SafeAreaView style={{ flex: 1 }}>
             <ImageBackground
                 style={{ height }}
-                source={require('../assets/images/fondo.png')}
+                source={require('../assets/images/fondo.jpg')}
             >
                 <Text style={styles.text}>Pilar Tecno Social App</Text>
                 <FormInput

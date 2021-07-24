@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import {
     SafeAreaView,
-    ScrollView,
     Dimensions,
-    StatusBar,
     StyleSheet,
     Text,
     ImageBackground,
@@ -11,84 +9,116 @@ import {
     View,
     Alert
 } from 'react-native';
+import { Divider } from 'react-native-elements/dist/divider/Divider';
+import { actions } from '../store'
+import { connect } from 'react-redux'
 
 const height = Dimensions.get('window').height
 const width = Dimensions.get('window').width
 
+class PostDetail extends React.Component {
+    constructor(props) {
+        super(props);
 
-export default class PostDetail extends React.Component {
-
-    _onHomePress = () => {
-        Alert.alert(
-            "Hola",
-            "Ya te encuentras ahí",
-            [
-                { text: "OK", onPress: () => console.log("OK Pressed") }
-            ]
-        );
+    }
+    _delPost = () => {
+        const { item } = this.props.route.params;
+        const { id } = item;
+        ///VALIDACIONES
+        this.props.delPost({ id }).then(() => {
+            this.props.navigation.goBack()
+        })
     }
 
 
     render() {
+        const { item } = this.props.route.params;
         return (
-            <SafeAreaView style={{ flex: 1 }}>
+            <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                 <ImageBackground
                     style={{ height }}
-                    source={require('../assets/images/fondo.png')}
+                    source={require('../assets/images/fondo.jpg')}
                 >
-                    <View style={{ flexDirection: 'column', height, justifyContent: 'center' }}>
-                        <View style={{ flexDirection: 'row' }}>
-                            <TouchableOpacity
-                                onPress={() => this._onHomePress()}
-                                style={[styles.button, { backgroundColor: 'rgba(60, 179, 113, 0.5)' }]}
-                            >
-                                <Text style={styles.text}>
-                                    Principal
+                    <View style={{
+                        margin: 20,
+                        padding: 5,
+                        marginTop: 20
+                    }}>
+                        <View style={{ marginTop: 50, backgroundColor: 'rgba(0,0,0,0.5)', borderRadius: 8 }}>
+                            <View style={styles.titlecontainer}>
+                                <Text style={styles.title}>
+                                    {item.title}
                                 </Text>
-                            </TouchableOpacity>
-
-                            <TouchableOpacity style={[styles.button, { backgroundColor: 'rgba(238, 0, 238, 0.5)' }]}>
+                            </View>
+                            <Divider />
+                            <View style={styles.bodycontainer}>
                                 <Text style={styles.text}>
-                                    Perfil
+                                    {item.body}
                                 </Text>
-                            </TouchableOpacity>
-                        </View>
-
-                        <View style={{ flexDirection: 'row', }}>
-                            <TouchableOpacity style={[styles.button, { backgroundColor: 'rgba(255, 165, 0, 0.5)' }]}>
-                                <Text style={styles.text}>
-                                    Posteos
-                                </Text>
-                            </TouchableOpacity>
-
-                            <TouchableOpacity style={[styles.button, { backgroundColor: 'rgba(0, 165, 188, 0.8)' }]}>
-                                <Text style={styles.text}>
-                                    Mapa
-                                </Text>
-                            </TouchableOpacity>
+                            </View>
                         </View>
                     </View>
+                    <TouchableOpacity
+                        onPress={() => this.props.navigation.navigate('PostEdit', { item })}
+                        style={[styles.button,]}
+                    >
+                        <Text>Edit Post</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => this._delPost()}
+                        style={[styles.button,]}
+                    >
+                        <Text>Delete Post</Text>
+                    </TouchableOpacity>
 
                 </ImageBackground>
             </SafeAreaView>
+
         )
     }
 }
 
 const styles = StyleSheet.create({
     text: {
-        fontSize: 30,
+        fontSize: 14,
+        color: '#fff',
+        textAlign: 'center'
+    },
+    title: {
+        fontSize: 16,
         fontWeight: 'bold',
         color: '#fff',
         textAlign: 'center'
     },
-    button: {
+    titlecontainer: {
+        padding: 10,
+    },
+    bodycontainer: {
+        padding: 10,
+    },
+    content: {
         margin: width / 20,
         height: width / 2.5,
         width: width / 2.5,
         borderRadius: 15,
         justifyContent: 'center',
-        backgroundColor: '#fff',
-        zIndex: 1
-    }
+    },
+    button: {
+        backgroundColor: 'rgba(165, 105, 189, 0.5)',
+        margin: width / 20,
+        width: width / 2,
+        marginLeft: 90,
+        borderRadius: 35,
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 10,
+    },
 })
+const mapDispatchToProps = dispatch => ({
+    delPost: (data) =>
+        dispatch(actions.posts.delPost(data)),
+})
+const mapStateToProps = state => ({
+
+})
+export default connect(mapStateToProps, mapDispatchToProps)((PostDetail))
