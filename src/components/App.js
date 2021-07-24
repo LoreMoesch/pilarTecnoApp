@@ -10,13 +10,10 @@ import {
 
 import AppStack from '../routs/app';
 import { NavigationContainer } from '@react-navigation/native';
-
-import { Provider } from 'react-redux';
-import { store } from '../store';
-
+import { store, actions } from '../store';
 import auth from '@react-native-firebase/auth';
-import { useDispatch, connect } from 'react-redux';
-import { actions } from '../store';
+import { useDispatch, Provider } from 'react-redux';
+
 
 
 
@@ -25,7 +22,9 @@ const width = Dimensions.get('window').width
 
 
 const App = (props) => {
+
   let AppWrapped = () => {
+
     const [initializing, setInitializing] = useState(true);
     const [user, setUser] = useState();
     const dispatch = useDispatch()
@@ -39,6 +38,7 @@ const App = (props) => {
       }
       if (initializing) setInitializing(false);
     }
+
 
     useEffect(() => {
       const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
@@ -60,6 +60,7 @@ const App = (props) => {
     </Provider>
   );
 }
+
 
 const styles = StyleSheet.create({
   text: {

@@ -34,7 +34,7 @@ export default class Home extends React.Component {
       <SafeAreaView style={{ flex: 1 }}>
         <ImageBackground
           style={{ height }}
-          source={require('../assets/images/fondo.png')}
+          source={require('../assets/images/fondo.jpg')}
         >
           <View style={{ flexDirection: 'column', height, justifyContent: 'center' }}>
             <View style={{ flexDirection: 'row' }}>

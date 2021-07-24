@@ -81,7 +81,7 @@ const Login = (props) => {
         <SafeAreaView style={{ flex: 1 }}>
             <ImageBackground
                 style={{ height }}
-                source={require('../assets/images/fondo.png')}
+                source={require('../assets/images/fondo.jpg')}
             >
                 <Text style={styles.text}>Pilar Tecno Social App</Text>
                 <FormInput
@@ -101,7 +101,7 @@ const Login = (props) => {
                     iconType="lock"
                     secureTextEntry={true}
                 />
-                
+
                 <FormButton
                     buttonTitle="Sign In"
                     onPress={() => {

@@ -34,7 +34,7 @@ export default class Map extends React.Component {
             <SafeAreaView style={{ flex: 1 }}>
                 <ImageBackground
                     style={{ height }}
-                    source={require('../assets/images/fondo.png')}
+                    source={require('../assets/images/fondo.jpg')}
                 >
 
                     <View style={{ flexDirection: 'column-reverse', backgroundColor: 'rgba(0, 165, 188, 0.8)', borderRadius: 3, justifyContent: 'center' }}>
