@@ -11,3 +11,4 @@ export const MapStackScreen = () => {
         </MapStack.Navigator>
     )
 }
+
