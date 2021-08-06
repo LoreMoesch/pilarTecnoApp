@@ -2,5 +2,6 @@
     <string name="app_name">pilarTectoApp</string>
     <string name="facebook_app_id">566148501089417</string>
     <string name="fb_login_protocol_scheme">fb566148501089417</string>
+  
 
 </resources>

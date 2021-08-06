@@ -2,6 +2,9 @@
   package="com.lmoesch.pilartecnoapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
 
     <application
       android:name=".MainApplication"
@@ -10,7 +13,9 @@
       android:roundIcon="@mipmap/ic_launcher_round"
       android:allowBackup="false"
       android:theme="@style/AppTheme">
-    <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+    <meta-data 
+    android:name="com.facebook.sdk.ApplicationId" 
+    android:value="@string/facebook_app_id"/>
       <activity 
         android:name="com.facebook.FacebookActivity" 
         android:configChanges= "keyboard|keyboardHidden|screenLayout|screenSize|orientation" 
@@ -37,5 +42,12 @@
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
       </activity>
+      <!-- You will only need to add this meta-data tag, but make sure it's a child of application -->
+   <meta-data
+     android:name="com.google.android.geo.API_KEY"   
+     android:value="AIzaSyAtP014aHhyWgiNKJJ7I19AnzgKncqyIJ0"/>
+
+   <!-- You will also only need to add this uses-library tag -->
+   <uses-library android:name="org.apache.http.legacy" android:required="false"/>
     </application>
 </manifest>
