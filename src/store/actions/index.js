@@ -1,5 +1,5 @@
 import * as user from './user';
-import posts from './posts';
+import * as posts from './posts';
 export const actions = {
     user,
     posts,
