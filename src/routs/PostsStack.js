@@ -5,14 +5,57 @@ import PostEdit from '../screens/PostEdit';
 import PostCreate from '../screens/PostCreate';
 import { createStackNavigator } from '@react-navigation/stack';
 
-const PostsStack = createStackNavigator();
+const PostStack = createStackNavigator();
 
 export const PostsStackScreen = () => {
-    return (<PostsStack.Navigator>
-        <PostsStack.Screen name="Posts" component={Posts} />
-        <PostsStack.Screen name="PostDetail" component={PostDetail} />
-        <PostsStack.Screen name="PostEdit" component={PostEdit} />
-        <PostsStack.Screen name="PostCreate" component={PostCreate} />
-    </PostsStack.Navigator>
+    return (
+        <PostStack.Navigator>
+            <PostStack.Screen
+                name="Posts"
+                component={Posts}
+                options={{
+                    title: 'Posts',
+                    headerStyle: {
+                        backgroundColor: '#f9fafd',
+                        shadowColor: '#f9fafd',
+                        elevation: 0,
+                    },
+
+                }}
+            />
+            <PostStack.Screen
+                name="PostDetail"
+                component={PostDetail}
+                options={{
+                    title: 'Detail',
+                    headerStyle: {
+                        backgroundColor: '#f9fafd',
+                        shadowColor: '#f9fafd',
+                        elevation: 0,
+                    },
+                }} />
+            <PostStack.Screen
+                name="PostEdit"
+                component={PostEdit}
+                options={{
+                    title: 'Edit',
+                    headerStyle: {
+                        backgroundColor: '#f9fafd',
+                        shadowColor: '#f9fafd',
+                        elevation: 0,
+                    },
+                }} />
+            <PostStack.Screen
+                name="PostCreate"
+                component={PostCreate}
+                options={{
+                    title: 'Add Post',
+                    headerStyle: {
+                        backgroundColor: '#f9fafd',
+                        shadowColor: '#f9fafd',
+                        elevation: 0,
+                    },
+                }} />
+        </PostStack.Navigator>
     )
 }

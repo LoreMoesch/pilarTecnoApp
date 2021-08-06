@@ -53,6 +53,15 @@ export default class Map extends React.Component {
     //     this._getLocation()
     // }
 
+    render() {
+        return (
+            <SafeAreaView style={{ flex: 1 }}>
+                <ImageBackground
+                    style={{ height }}
+                    source={require('../assets/images/fondo.jpg')}
+                >
+
+
     async componentDidMount() {
         await hasLocationPermission();
         this._getLocation()
