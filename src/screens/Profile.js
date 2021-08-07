@@ -35,7 +35,6 @@ class Profile extends React.Component {
             name: user.providerData[0].displayName
         })
     }
-
     render() {
         const { email, photoURL, name } = this.state
         return (
@@ -72,8 +71,6 @@ class Profile extends React.Component {
         )
     }
 }
-
-
 const styles = StyleSheet.create({
     text: {
         fontSize: 30,
@@ -81,19 +78,16 @@ const styles = StyleSheet.create({
         // color:'#fff',
         textAlign: 'center'
     },
-
     content: {
         flex: 1,
         top: 50,
         justifyContent: 'center',
         // alignItems:'center'
     },
-
     dataContainer: {
         top: 20,
         width
     },
-
     infoText: {
         textAlign: 'center',
         fontSize: 18,
@@ -109,8 +103,6 @@ const mapDispatchToProps = dispatch => ({
 const mapStateToProps = state => ({
     user: state.user.user
 })
-
-
 export default connect(mapStateToProps, mapDispatchToProps)((Profile))
 
 
