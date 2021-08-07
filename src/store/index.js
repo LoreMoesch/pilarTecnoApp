@@ -11,6 +11,7 @@ const store = createStore(
     initialState,
     compose(applyMiddleware(thunk, logger)),
 );
+
 export { store, actions };
 
 
